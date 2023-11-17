@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&family=Pixelify+Sans:wght@400;500;600;700&family=Titillium+Web:wght@400;600;700&display=swap');
+
+/* ===== GLOBAL STYLES =====*/
+
+html {
+  /*@ Background - https://css-pattern.com/ */
+  --s: 200px;
+  /* >>> control the size of the boxes */
+  /* >>> Original colors:
+  --c1: #1d1d1d;
+  --c2: #4e4f51;
+  --c3: #3c3c3c; 
+  */
+  --c1: #031b23;
+  --c2: #0c607c;
+  --c3: #073747;
+  background:
+    repeating-conic-gradient(from 30deg,
+      #0000 0 120deg,
+      var(--c3) 0 180deg) calc(.5*var(--s)) calc(.5*var(--s)*0.577),
+    repeating-conic-gradient(from 30deg,
+      var(--c1) 0 60deg,
+      var(--c2) 0 120deg,
+      var(--c3) 0 180deg);
+  background-size: var(--s) calc(var(--s)*0.577);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  /* padding: 0; */
+  /*>>> padding only impacts conversion table inputs, easier to keep default */
+}
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* ***** Global Headings **** */
+h2,
+h3,
+h4 {
+  font-weight: 900;
+  color: #118ab2;
+  text-shadow: 1px 1px 1px #3E4855;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
+/* ===== MAIN CONTAINERS ===== */
+
+/* ***** Full Page Wrapper */
+.app-page {
+  position: relative;
+  /*@ make footer stick to the bottom and center content using flex: https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14 */
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 2px;
+  /*>>> a little space below footer*/
+  color: #3E4855;
+  /*@ Waves - https://www.magicpattern.design/tools:
+  background-color: #1d1d1d;
+  opacity: 1;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #1d1d1d 40px), repeating-linear-gradient(#118ab255, #118ab2); */
+}
+
+.app-page::before {      
+  content: "";
+  background-image: url(../public/assets/rocket.png);
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: right;
+  /* background-size: cover; */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.88;
+}
+
+
+/* ***** Main Content Wrapper (excludes header/footer) */
+.main-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  justify-content: center;
+  gap: 40px;
+  padding-block: 0 30px;
+}
+
+
+/* ***** Currency Converter & Newsfeed Section Wrappers */
+.currency-converter,
+.newsfeed {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  height: fit-content;
+  padding-block: 10px 20px;
+  padding-inline: 15px;
+  background-color: #ffffffdd;
+  border: dashed 2px #118ab2;
+  border-radius: 10px;
+  box-shadow: #ffffff66 5px 5px, #ffffff4d 10px 10px, #ffffff33 15px 15px, #ffffff1a 20px 20px, #ffffff0d 25px 25px;
+}
+
+
+/* ===== HEADER ===== */
+
+header {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  margin-bottom: clamp(1.563rem, 0.827rem + 3.676vw, 3.125rem);
+  padding-top: 20px;
+  padding-left: 20px;
+  text-align: center;
+  /* background-color: #118ab290; */
+}
+
+@media all and (max-width: 900px) {
+  header {
+    justify-content: center;
+    padding-top: 10px;
+    padding-left: 0px;
+  }
+}
+
+.header-icon {
+  width: clamp(2.5rem, 1.071rem + 7.143vw, 3.75rem);
+  height: clamp(2.5rem, 1.071rem + 7.143vw, 3.75rem);
+  box-shadow: 2px 2px 5px #000;
+  border-radius: 50%;
+}
+
+/* +++ clamp font-size and fix h1/icon layout plus margin/padding for smaller screen*/
+
+h1 {
+  padding-block: 12px 20px;
+  font-family: 'Pixelify Sans', sans-serif;
+  color: #fff;
+  font-size: clamp(1.438rem, -0.134rem + 7.857vw, 2.813rem);
+  text-shadow: 3px 3px 1px #000;
+  text-decoration: underline;
+  letter-spacing: 3px;
+}
+
+
+/* ===== CURRENCY CONVERTER SECTION ===== */
+
+.currency-converter {}
+
+
+/* ***** Currency Converter Title */
+
+.currency-converter-title-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0rem, -6.667rem + 33.333vw, 0.625rem);
+}
+
+.currency-converter-title {
+  /* color: #3E4855;
+  text-decoration: underline; */
+  font-size: clamp(1.25rem, 0.964rem + 1.429vw, 1.5rem);
+}
+
+.currency-converter-title-icon {
+  width: clamp(1.875rem, 0.804rem + 5.357vw, 2.813rem);
+  height: clamp(1.875rem, 0.804rem + 5.357vw, 2.813rem);
+}
+
+
+/* ***** Conversion & Exchange Box Wrapper */
+.conversion-box-wrapper,
+.exchange-rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-block: 10px 15px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
+  box-shadow: 0 3px 10px #00000033;
+}
+
+
+/***** Conversion Box */
+
+.conversion-box-wrapper {}
+
+
+/*_____ Conversion Table / Inputs */
+
+.conversion-table-currency-labels {
+  text-align: right;
+  color: #3E4855;
+  font-weight: 600;
+}
+
+.input-box {
+  max-width: 80px;
+  text-align: right;
+  padding-inline: 5px;
+}
+
+.input-box,
+select.currency-options {
+  border: none;
+  border-radius: 2px;
+  font-family: 'Titillium Web', sans-serif;
+  color: #3E4855;
+}
+
+.input-box.primary {
+  border: 2px dashed #3e485571;
+}
+
+.input-box.secondary {
+  color: #fff;
+  background-color: #3e485571;
+}
+
+select.currency-options {
+  border: 2px dashed #3e485571;
+}
+
+/*----- Disable arrows from number input (can still increment using arrow keys when focused: */
+/* >>> Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* >>> Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/*_____ Conversion Error */
+/*::::: Hidden by default */
+.conversion-error {
+  padding-inline: 30px;
+  color: #ef476f;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/*_____ Conversion Button */
+
+.convert-btn {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.convert-btn {
+  background-color: #11b239;
+  padding-inline: 7px;
+  padding-block: 3px;
+  font-family: 'Titillium Web', sans-serif;
+  color: #fff;
+  font-weight: 600;
+  font-size: clamp(0.75rem, 0.607rem + 0.714vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border: 2px dashed #11b239;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: 3px 3px 7px #3E4855;
+  transition: .4s;
+}
+
+.convert-btn:hover {
+  transition: .4s;
+  border: 2px dashed #11b239;
+  background-color: #fff;
+  color: #11b239;
+}
+
+.convert-btn:active {
+  color: #fff;
+  background-color: #118ab2;
+  border: 2px dashed #fff;
+}
+
+.convert-button-icon {
+  width: 25px;
+  height: 20px;
+  transform: translateY(-1px);
+}
+
+
+/* ***** Exchange Rate Box */
+
+.exchange-rate {}
+
+
+/* _____ Exchange Rate Title */
+
+.exchange-rate-title-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.exchange-rate-title {
+  /* color: #3E4855; */
+  /* text-decoration: underline; */
+}
+
+.exchange-rate-title-icon {
+  width: 30px;
+  height: 30px;
+}
+
+
+/* _____ Exchange Rate Result */
+
+.exchange-rate-result {
+  font-size: 24px;
+  color: #3E4855;
+  font-weight: bold;
+  transform: translateY(-3px);
+}
+
+
+/* _____ Exchange Rate Currencies */
+
+.exchange-rate-currencies-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.exchange-rate-currencies-icon {
+  width: 25px;
+  height: 25px;
+  box-shadow: 3px 3px 7px #3E4855;
+  border-radius: 50%;
+}
+
+.exchange-rate-currencies-icon.arrows {
+  width: 18px;
+  height: 18px;
+  box-shadow: none;
+  transform: translate(-0.5px, 1.5px);
+  rotate: -88deg;
+  color: #3E4855;
+}
+
+/*----- For using the currency name text instead of icons:
+.exchange-rate-currencies-wrapper {
+  color: #118ab2;
+  font-weight: bold;
+  text-shadow: 1px 3px 1px #3E48553b;
+} */
+
+
+/* ===== NEWSFEED SECTION ===== */
+
+.newsfeed {}
+
+
+/* ***** Newsfeed Title */
+
+.newsfeed-title-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-inline: clamp(0rem, -1.071rem + 5.357vw, 0.938rem);
+}
+
+.newsfeed-title {
+  font-size: clamp(1.25rem, 0.964rem + 1.429vw, 1.5rem);
+  text-decoration: underline;
+}
+
+.newsfeed-title-icon {
+  width: 55px;
+  height: 55px;
+  rotate: 15deg;
+}
+
+
+/* ***** Newsfeed Articles */
+
+.articles-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding-block: 5px 10px;
+  padding-inline: 7px;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
+  box-shadow: 0 3px 10px #00000033;
+}
+
+.articles-div {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.article-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.article-link {
+  color: #11b239;
+  font-weight: 600;
+}
+
+.article-link:hover {
+  color: #b2118a;
+}
+
+.article-link:visited {
+  color: purple;
+}
+
+
+/* ===== Footer */
+
+/***** Footer main text & credits div */
+
+footer {
+  z-index: 1;
+  padding-inline: 5px;
+  margin-top: auto;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.footer-credits-div {
+  font-size: 10px;
+  color: #fff;
+}
+
+
+/***** Footer links */
+
+/* _____ Footer My Link */
+
+.footer-my-link-div a {
+  color: #00ffff;
+}
+
+.footer-my-link-div a:hover {
+  color: #ffff00;
+}
+
+.footer-my-link-div a:visited {
+  color: purple;
+}
+
+
+/* _____ Footer Credits Links*/
+
+.footer-credits-div a {
+  color: #00ffff;
+}
+
+.footer-credits-div a:hover {
+  color: #ffff00;
+}
+
+.footer-credits-div a:visited {
+  color: purple;
+}
